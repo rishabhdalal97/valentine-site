@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Will you be my Valentine?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffecd2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-top: max(1rem, env(safe-area-inset-top));
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+      overflow-x: hidden;
+      position: relative;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Floating hearts – fill space around content */
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 2.5rem;
+      color: rgba(233, 30, 99, 0.9);
+      animation: float-up linear infinite;
+      bottom: -3rem;
+    }
+
+    .heart:nth-child(1)  { left: 1%;   animation-duration: 6s;   animation-delay: 0s;   font-size: 2.2rem; color: rgba(233, 30, 99, 0.92); }
+    .heart:nth-child(2)  { left: 5%;   animation-duration: 8s;   animation-delay: 0.4s; font-size: 3rem;   color: rgba(255, 182, 193, 0.9); }
+    .heart:nth-child(3)  { left: 9%;   animation-duration: 7s;   animation-delay: 1.2s; font-size: 2.6rem; }
+    .heart:nth-child(4)  { left: 13%;  animation-duration: 9s;   animation-delay: 2s;   font-size: 2.8rem; color: rgba(244, 143, 177, 0.88); }
+    .heart:nth-child(5)  { left: 17%;  animation-duration: 6.5s; animation-delay: 0.8s; font-size: 2.4rem; }
+    .heart:nth-child(6)  { left: 21%;  animation-duration: 7.5s; animation-delay: 1.6s; font-size: 3.2rem; color: rgba(255, 182, 193, 0.9); }
+    .heart:nth-child(7)  { left: 25%;  animation-duration: 8.5s; animation-delay: 2.4s; font-size: 2.5rem; }
+    .heart:nth-child(8)  { left: 29%;  animation-duration: 6s;   animation-delay: 0.2s; font-size: 2.9rem; }
+    .heart:nth-child(9)  { left: 33%;  animation-duration: 7s;   animation-delay: 1s;   font-size: 2.7rem; color: rgba(233, 30, 99, 0.9); }
+    .heart:nth-child(10) { left: 37%;  animation-duration: 8s;   animation-delay: 1.8s; font-size: 3.1rem; color: rgba(255, 182, 193, 0.88); }
+    .heart:nth-child(11) { left: 41%;  animation-duration: 6.8s; animation-delay: 0.6s; font-size: 2.3rem; }
+    .heart:nth-child(12) { left: 45%;  animation-duration: 9s;   animation-delay: 2.2s; font-size: 2.8rem; }
+    .heart:nth-child(13) { left: 49%;  animation-duration: 7.2s; animation-delay: 0.3s; font-size: 3rem; color: rgba(244, 143, 177, 0.9); }
+    .heart:nth-child(14) { left: 53%;  animation-duration: 8.2s; animation-delay: 1.4s; font-size: 2.6rem; }
+    .heart:nth-child(15) { left: 57%;  animation-duration: 6.3s; animation-delay: 2.6s; font-size: 2.4rem; }
+    .heart:nth-child(16) { left: 61%;  animation-duration: 7.8s; animation-delay: 0.9s; font-size: 2.9rem; color: rgba(255, 182, 193, 0.9); }
+    .heart:nth-child(17) { left: 65%;  animation-duration: 8.8s; animation-delay: 1.7s; font-size: 2.5rem; }
+    .heart:nth-child(18) { left: 69%;  animation-duration: 6.5s; animation-delay: 0.5s; font-size: 3.2rem; }
+    .heart:nth-child(19) { left: 73%;  animation-duration: 7.4s; animation-delay: 2.1s; font-size: 2.7rem; color: rgba(233, 30, 99, 0.92); }
+    .heart:nth-child(20) { left: 77%;  animation-duration: 9.2s; animation-delay: 0.1s; font-size: 2.2rem; color: rgba(255, 182, 193, 0.88); }
+    .heart:nth-child(21) { left: 81%;  animation-duration: 6.9s; animation-delay: 1.3s; font-size: 2.8rem; }
+    .heart:nth-child(22) { left: 85%;  animation-duration: 8s;   animation-delay: 2.5s; font-size: 3rem; }
+    .heart:nth-child(23) { left: 89%;  animation-duration: 7.3s; animation-delay: 0.7s; font-size: 2.4rem; color: rgba(244, 143, 177, 0.9); }
+    .heart:nth-child(24) { left: 93%;  animation-duration: 6.6s; animation-delay: 1.9s; font-size: 2.6rem; }
+    .heart:nth-child(25) { left: 3%;   animation-duration: 8.4s; animation-delay: 3s;   font-size: 2.5rem; color: rgba(255, 182, 193, 0.9); }
+    .heart:nth-child(26) { left: 11%;  animation-duration: 7.1s; animation-delay: 3.5s; font-size: 2.9rem; }
+    .heart:nth-child(27) { left: 19%;  animation-duration: 6.2s; animation-delay: 4s;   font-size: 2.3rem; }
+    .heart:nth-child(28) { left: 27%;  animation-duration: 9.3s; animation-delay: 3.2s; font-size: 3.1rem; color: rgba(233, 30, 99, 0.88); }
+    .heart:nth-child(29) { left: 35%;  animation-duration: 7.6s; animation-delay: 3.8s; font-size: 2.7rem; }
+    .heart:nth-child(30) { left: 43%;  animation-duration: 8.6s; animation-delay: 4.2s; font-size: 2.4rem; color: rgba(255, 182, 193, 0.9); }
+    .heart:nth-child(31) { left: 51%;  animation-duration: 6.4s; animation-delay: 3.4s; font-size: 2.8rem; }
+    .heart:nth-child(32) { left: 59%;  animation-duration: 7.9s; animation-delay: 3.9s; font-size: 3rem; }
+    .heart:nth-child(33) { left: 67%;  animation-duration: 9.1s; animation-delay: 3.1s; font-size: 2.5rem; color: rgba(244, 143, 177, 0.88); }
+    .heart:nth-child(34) { left: 75%;  animation-duration: 6.7s; animation-delay: 4.1s; font-size: 2.6rem; }
+    .heart:nth-child(35) { left: 83%;  animation-duration: 8.3s; animation-delay: 3.6s; font-size: 2.9rem; }
+    .heart:nth-child(36) { left: 91%;  animation-duration: 7.5s; animation-delay: 3.3s; font-size: 2.4rem; color: rgba(233, 30, 99, 0.9); }
+
+    .heart.drift-left { animation: float-up-drift-left linear infinite; }
+    .heart.drift-right { animation: float-up-drift-right linear infinite; }
+
+    @keyframes float-up {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+      8%   { opacity: 0.92; }
+      92%  { opacity: 0.92; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes float-up-drift-left {
+      0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+      8%   { opacity: 0.9; }
+      92%  { opacity: 0.9; }
+      100% { transform: translateY(-100vh) translateX(-50px) rotate(-180deg); opacity: 0; }
+    }
+
+    @keyframes float-up-drift-right {
+      0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+      8%   { opacity: 0.9; }
+      92%  { opacity: 0.9; }
+      100% { transform: translateY(-100vh) translateX(50px) rotate(180deg); opacity: 0; }
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: min(420px, 90vw);
+      width: 100%;
+    }
+
+    .photo-wrap {
+      width: 100%;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      margin-bottom: 1.5rem;
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+      background: linear-gradient(135deg, #6d2d52 0%, #ad1457 40%, #c2185b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.02em;
+    }
+
+    .buttons-wrap {
+      position: relative;
+      width: 100%;
+      min-height: 120px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 380px) {
+      .buttons-wrap {
+        flex-direction: column;
+      }
+      .btn-yes {
+        margin-right: 0;
+      }
+    }
+
+    /* Circle boundary for the No button (invisible) */
+    .no-zone {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      border-radius: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18),
+                  0 1px 0 rgba(255, 255, 255, 0.2) inset;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) inset;
+    }
+
+    .btn-yes {
+      padding: 1rem 2.5rem;
+      font-size: 1.25rem;
+      background: linear-gradient(180deg, #f06292 0%, #e91e63 50%, #c2185b 100%);
+      color: white;
+      margin-right: 0.5rem;
+      min-width: 120px;
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.04);
+      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.35),
+                  0 1px 0 rgba(255, 255, 255, 0.25) inset;
+    }
+
+    .btn-no {
+      position: absolute;
+      padding: 0.6rem 1.35rem;
+      font-size: 0.875rem;
+      background: linear-gradient(180deg, #90a4ae 0%, #78909c 50%, #607d8b 100%);
+      color: white;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 64px;
+      min-height: 44px;
+      user-select: none;
+      touch-action: none;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-no:hover {
+      box-shadow: 0 4px 14px rgba(96, 125, 139, 0.35),
+                  0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    }
+
+    /* Confetti canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts-container" aria-hidden="true">
+    <span class="heart drift-left">♥</span><span class="heart">♥</span><span class="heart drift-right">♥</span><span class="heart">♥</span><span class="heart drift-left">♥</span><span class="heart">♥</span><span class="heart drift-right">♥</span><span class="heart">♥</span><span class="heart drift-left">♥</span><span class="heart">♥</span>
+    <span class="heart drift-right">♥</span><span class="heart">♥</span><span class="heart drift-left">♥</span><span class="heart">♥</span><span class="heart drift-right">♥</span><span class="heart">♥</span><span class="heart drift-left">♥</span><span class="heart">♥</span><span class="heart drift-right">♥</span><span class="heart">♥</span>
+    <span class="heart drift-left">♥</span><span class="heart">♥</span><span class="heart drift-right">♥</span><span class="heart">♥</span><span class="heart drift-left">♥</span><span class="heart">♥</span><span class="heart drift-right">♥</span><span class="heart">♥</span><span class="heart drift-left">♥</span><span class="heart">♥</span>
+    <span class="heart drift-right">♥</span><span class="heart">♥</span><span class="heart drift-left">♥</span><span class="heart">♥</span><span class="heart drift-right">♥</span><span class="heart">♥</span>
+  </div>
+
+  <main class="content">
+    <div class="photo-wrap">
+      <img src="couple.jpeg" alt="Us" />
+    </div>
+    <h1>Will you be my Valentine? ♥</h1>
+    <div class="buttons-wrap">
+      <button type="button" class="btn btn-yes" id="btn-yes">Yes</button>
+      <div class="no-zone" id="no-zone">
+        <button type="button" class="btn btn-no" id="btn-no">No</button>
+      </div>
+    </div>
+  </main>
+
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <script>
+    (function () {
+      var btnYes = document.getElementById('btn-yes');
+      var btnNo = document.getElementById('btn-no');
+      var noZone = document.getElementById('no-zone');
+
+      var zoneRect = null;
+      var centerX = 0;
+      var centerY = 0;
+      var radius = 0;
+
+      function updateZone() {
+        zoneRect = noZone.getBoundingClientRect();
+        centerX = zoneRect.left + zoneRect.width / 2;
+        centerY = zoneRect.top + zoneRect.height / 2;
+        radius = Math.min(zoneRect.width, zoneRect.height) / 2 - 30;
+      }
+
+      window.addEventListener('resize', updateZone);
+      updateZone();
+
+      var mouseX = 0;
+      var mouseY = 0;
+
+      document.addEventListener('mousemove', function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      document.addEventListener('touchmove', function (e) {
+        if (e.touches.length) {
+          mouseX = e.touches[0].clientX;
+          mouseY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      function clampToCircle() {
+        updateZone();
+        var dx = btnNo.offsetLeft + btnNo.offsetWidth / 2 - noZone.offsetWidth / 2;
+        var dy = btnNo.offsetTop + btnNo.offsetHeight / 2 - noZone.offsetHeight / 2;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > radius) {
+          var angle = Math.atan2(dy, dx);
+          var newDx = Math.cos(angle) * radius;
+          var newDy = Math.sin(angle) * radius;
+          btnNo.style.left = (noZone.offsetWidth / 2 + newDx - btnNo.offsetWidth / 2) + 'px';
+          btnNo.style.top = (noZone.offsetHeight / 2 + newDy - btnNo.offsetHeight / 2) + 'px';
+        }
+      }
+
+      noZone.addEventListener('mouseenter', function () {
+        runAway();
+      });
+      noZone.addEventListener('mousemove', function () {
+        runAway();
+      });
+      btnNo.addEventListener('mouseenter', function () {
+        runAway();
+      });
+      btnNo.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        mouseX = e.touches[0].clientX;
+        mouseY = e.touches[0].clientY;
+        runAway();
+      }, { passive: false });
+
+      function runAway() {
+        updateZone();
+        var btnRect = btnNo.getBoundingClientRect();
+        var btnCenterX = btnRect.left + btnRect.width / 2;
+        var btnCenterY = btnRect.top + btnRect.height / 2;
+        var diffX = btnCenterX - mouseX;
+        var diffY = btnCenterY - mouseY;
+        var dist = Math.sqrt(diffX * diffX + diffY * diffY) || 1;
+        var move = 28;
+        var stepX = (diffX / dist) * move;
+        var stepY = (diffY / dist) * move;
+        var currentLeft = parseFloat(btnNo.style.left) || (noZone.offsetWidth / 2 - btnNo.offsetWidth / 2);
+        var currentTop = parseFloat(btnNo.style.top) || (noZone.offsetHeight / 2 - btnNo.offsetHeight / 2);
+        var newLeft = currentLeft + stepX;
+        var newTop = currentTop + stepY;
+        var newCenterX = newLeft + btnNo.offsetWidth / 2;
+        var newCenterY = newTop + btnNo.offsetHeight / 2;
+        var fromZoneCenterX = newCenterX - noZone.offsetWidth / 2;
+        var fromZoneCenterY = newCenterY - noZone.offsetHeight / 2;
+        var fromCenterDist = Math.sqrt(fromZoneCenterX * fromZoneCenterX + fromZoneCenterY * fromZoneCenterY);
+        if (fromCenterDist > radius) {
+          var angle = Math.atan2(fromZoneCenterY, fromZoneCenterX);
+          newLeft = noZone.offsetWidth / 2 + Math.cos(angle) * radius - btnNo.offsetWidth / 2;
+          newTop = noZone.offsetHeight / 2 + Math.sin(angle) * radius - btnNo.offsetHeight / 2;
+        }
+        btnNo.style.left = newLeft + 'px';
+        btnNo.style.top = newTop + 'px';
+      }
+
+      function confetti() {
+        var canvas = document.getElementById('confetti-canvas');
+        var ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        var W = canvas.width;
+        var H = canvas.height;
+        var colors = [
+          '#e91e63', '#f06292', '#f8bbd9', '#ff4081', '#c2185b',
+          '#ffeb3b', '#ffc107', '#ff9800', '#ffab91', '#fff59d',
+          '#ffffff', '#e1bee7', '#ce93d8', '#f48fb1', '#ffcdd2'
+        ];
+        var pieces = [];
+        var burstPoints = [
+          { x: W * 0.2, y: H * 0.5 },
+          { x: W * 0.5, y: H * 0.45 },
+          { x: W * 0.8, y: H * 0.5 },
+          { x: W * 0.35, y: H * 0.6 },
+          { x: W * 0.65, y: H * 0.6 }
+        ];
+        function addBurst(origin, n, speedMin, speedMax) {
+          for (var i = 0; i < n; i++) {
+            var angle = Math.random() * Math.PI * 2;
+            var speed = speedMin + Math.random() * (speedMax - speedMin);
+            var r = Math.random();
+            var shape = r < 0.25 ? 'circle' : (r < 0.5 ? 'streamer' : 'rect');
+            var w = shape === 'streamer' ? 3 + Math.random() * 4 : 6 + Math.random() * 10;
+            var h = shape === 'streamer' ? 14 + Math.random() * 20 : 4 + Math.random() * 8;
+            pieces.push({
+              x: origin.x + (Math.random() - 0.5) * 40,
+              y: origin.y,
+              w: w,
+              h: h,
+              color: colors[Math.floor(Math.random() * colors.length)],
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed - 4,
+              rotation: Math.random() * 360,
+              rotationSpeed: (Math.random() - 0.5) * 35,
+              shape: shape,
+              gravity: 0.22 + Math.random() * 0.14
+            });
+          }
+        }
+        burstPoints.forEach(function (pt) {
+          addBurst(pt, 55, 12, 28);
+        });
+        var redirectDone = false;
+        function draw() {
+          if (redirectDone) return;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (var i = 0; i < pieces.length; i++) {
+            var p = pieces[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += p.gravity;
+            p.vx *= 0.996;
+            p.rotation += p.rotationSpeed;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation * Math.PI / 180);
+            ctx.fillStyle = p.color;
+            ctx.shadowColor = p.color;
+            ctx.shadowBlur = 10;
+            if (p.shape === 'circle') {
+              var r = Math.min(p.w, p.h) / 2;
+              ctx.beginPath();
+              ctx.arc(0, 0, r, 0, Math.PI * 2);
+              ctx.fill();
+            } else if (p.shape === 'streamer') {
+              ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            } else {
+              ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            }
+            ctx.shadowBlur = 0;
+            ctx.restore();
+          }
+          requestAnimationFrame(draw);
+        }
+        draw();
+        setTimeout(function () {
+          burstPoints.forEach(function (pt) {
+            addBurst(pt, 25, 8, 20);
+          });
+        }, 80);
+        setTimeout(function () {
+          redirectDone = true;
+          window.location.href = 'thankyou.html';
+        }, 800);
+      }
+
+      btnYes.addEventListener('click', function () {
+        btnYes.disabled = true;
+        btnNo.style.pointerEvents = 'none';
+        confetti();
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -132,13 +132,20 @@
       overflow: hidden;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
       margin-bottom: 1.5rem;
+      display: flex;
+      gap: 2px;
     }
 
     .photo-wrap img {
-      width: 100%;
-      height: auto;
+      flex: 1;
+      min-width: 0;
+      height: 220px;
       display: block;
       object-fit: cover;
+    }
+
+    .photo-wrap img:first-child {
+      object-position: top center;
     }
 
     h1 {
@@ -263,7 +270,8 @@
 
   <main class="content">
     <div class="photo-wrap">
-      <img src="couple.jpeg" alt="Us" />
+      <img src="rishab.jpg" alt="Rishab" />
+      <img src="vasu.jpg" alt="Vasu" />
     </div>
     <h1>Will you be my Valentine? ♥</h1>
     <div class="buttons-wrap">
